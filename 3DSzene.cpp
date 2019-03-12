@@ -159,19 +159,15 @@ void Menu_Process(int mode)
 	}
 }
 
-
-//create menu function for glut
 void Create_Menu()
 {
 
 	glutCreateMenu(Menu_Process);
-	glutAddMenuEntry(" Default             ", 1);
-	glutAddMenuEntry(" Animation", 2);
+	glutAddMenuEntry("Default", 1);
+	glutAddMenuEntry("Animation", 2);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
-
-//reshape function
 void Reshape_Function(int width, int height)
 {
 	if (height == 0)
