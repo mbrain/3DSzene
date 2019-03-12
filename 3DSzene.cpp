@@ -164,7 +164,7 @@ void Create_Menu()
 
 	glutCreateMenu(Menu_Process);
 	glutAddMenuEntry("Default", 1);
-	glutAddMenuEntry("Animation", 2);
+	glutAddMenuEntry("Interieur", 2);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
