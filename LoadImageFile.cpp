@@ -1,7 +1,6 @@
 #include"LoadImageFile.h"
 
 //load image & set it as a texture with dimension as 256*256
-
 GLuint LoadTexture :: LoadTextureImageFile(const char * filename)
 {
 	GLuint texture = 0;
