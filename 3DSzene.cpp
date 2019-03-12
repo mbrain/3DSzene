@@ -1,8 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
+
 #include"LoadImageFile.h"
-
 #include"DrawScene.h"
-
 #include"DisplayScene.h"
 
 float _Angle = 0.0;
@@ -13,17 +12,11 @@ float Y = 6.0;
 int _moveForeBack = 0;
 int moveUp = 0;
 int _width, _height;
-
-//variables to identify whether to show roof,outerwall or not
 int showRoof = 1;
 bool showOuterWall = true;
-
 float fb = 0.8;
-
-//declare texture_type & set it to DEFAULT
 int texture_type = MyTextures::DEFAULT;
 
-//initialize opon gl
 void Initialize_OpenGL()
 {
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -32,7 +25,6 @@ void Initialize_OpenGL()
 
 }
 
-//function to move left or right directions
 void Moving_Left_Right_Direction(float angle)
 {
 	X_2 = sin(angle);
@@ -41,8 +33,6 @@ void Moving_Left_Right_Direction(float angle)
 	gluLookAt(X, Y, Z, X + X_2, Y, Z + Z_2, 0.0f, 1.0f, 0.0f);
 }
 
-
-//function to move forward or backward directions
 void Moving_Foreword_Backword_Direction(int loc)
 {
 	X = X + loc*(X_2)*fb;
@@ -51,8 +41,6 @@ void Moving_Foreword_Backword_Direction(int loc)
 	gluLookAt(X, Y, Z, X + X_2, Y, Z + Z_2, 0.0f, 1.0f, 0.0f);
 }
 
-
-//main display scene function
 void Display_Scene()
 {
 	if (_moveForeBack)
@@ -66,18 +54,12 @@ void Display_Scene()
 		Moving_Left_Right_Direction(_Angle);
 	}
 
-	//clears the buffer & depth 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	//call function from DisplayGameScene class which will be displayed
 	DisplayGameScene::DisplayTexturedGameScene(texture_type, showRoof, showOuterWall);
-
 	glutSwapBuffers();
 }
 
-
-
-//keyboard function
 void Keyboard_function(unsigned char key, int x, int y)
 {
 	if (key == 27)
@@ -86,17 +68,15 @@ void Keyboard_function(unsigned char key, int x, int y)
 	}
 }
 
-
-//key pressed function
 void Key_Pressed(int key, int x, int y)
 {
 	if (key == GLUT_KEY_LEFT)
 	{
-		_moveLeftRight = -0.07;
+		_moveLeftRight = -0.05;
 	}
 	else if (key == GLUT_KEY_RIGHT)
 	{
-		_moveLeftRight = 0.07;
+		_moveLeftRight = 0.05;
 	}
 	else if (key == GLUT_KEY_UP)
 	{
@@ -108,51 +88,33 @@ void Key_Pressed(int key, int x, int y)
 	}
 	else if (key == GLUT_KEY_UP && key == GLUT_KEY_LEFT)
 	{
-		_moveLeftRight = 0.01;
+		_moveLeftRight = 0.1;
 	}
 	else if (key == GLUT_KEY_UP && key == GLUT_KEY_RIGHT)
 	{
-		_moveLeftRight = 0.01;
+		_moveLeftRight = 0.1;
 	}
 
-	 if ( key == GLUT_KEY_PAGE_UP)
+	if ( key == GLUT_KEY_PAGE_UP)
 	{
 		Y = Y + 0.5;
 		fb = fb + 0.02;
-		if (Y >= 50.0)
-		{
-			showRoof = 0;
-		}
-		else
-		{
-			showRoof = 1;
-		}
+		if (Y >= 50.0) showRoof = 1;
+		else showRoof = 1;
 		glLoadIdentity();
 		gluLookAt(X, Y, Z, X + X_2, Y, Z + Z_2, 0.0f, 1.0f, 0.0f);
 		glutPostRedisplay();
 	}
-	 else if (key == GLUT_KEY_PAGE_DOWN)
-	 {
-		 if (Y <= 0.2)
-		 {
-			 Y = 1.0;
-		 }
-		 else
-		 {
-			 Y = Y - 0.5;
-			 if (Y < 50.0)
-			 {
-				 showRoof = 1;
-			 }
-			 glLoadIdentity();
-			 gluLookAt(X, Y, Z, X + X_2, Y, Z + Z_2, 0.0f, 1.0f, 0.0f);
-			 glutPostRedisplay();
-		 }
-	 }
+	else if (key == GLUT_KEY_PAGE_DOWN)
+	{
+		Y = Y - 0.5;
+		if (Y < 50.0) showRoof = 1;
+		glLoadIdentity();
+		gluLookAt(X, Y, Z, X + X_2, Y, Z + Z_2, 0.0f, 1.0f, 0.0f);
+		glutPostRedisplay();		 
+	}
 }
 
-
-//key released function
 void Key_Released(int key, int x, int y)
 {
 	switch (key)
@@ -180,8 +142,6 @@ void Key_Released(int key, int x, int y)
 	}
 }
 
-
-//menu function
 void Menu_Process(int mode)
 {
 	switch (mode)
@@ -196,60 +156,6 @@ void Menu_Process(int mode)
 		glutPostRedisplay();
 		break;
 
-	case 3:
-		texture_type = MyTextures::BUILDINGS;
-		glutPostRedisplay();
-		break;
-
-	case 4:
-		texture_type = MyTextures::HORROR;
-		glutPostRedisplay();
-		break;
-
-	case 5:
-		texture_type = MyTextures::GREENY;
-		glutPostRedisplay();
-		break;
-
-	case 6:
-		texture_type = MyTextures::WOODS;
-		glutPostRedisplay();
-		break;
-
-	case 7:
-		texture_type = MyTextures::ROCKS;
-		glutPostRedisplay();
-		break;
-
-	case 8:
-		texture_type = MyTextures::CIRCUIT;
-		glutPostRedisplay();
-		break;
-
-	case 9:
-		if (showOuterWall)
-			showOuterWall = FALSE;
-		else
-			showOuterWall = TRUE;
-		glutPostRedisplay();
-		break;
-
-	case 10:
-		if (showRoof == 1)
-			showRoof = 0;
-		else
-			showRoof = 1;
-		glutPostRedisplay();
-		break;
-
-	case 11:
-		MessageBox(NULL, TEXT("UP\t\t:\tGo Forward\nDOWN\t\t:\tGo Backward\nLEFT\t\t:\tMove Left\nRIGHT\t\t:\tMove Right\nPAGE UP\t\t:\tGo Upward\nPAGE DOWN\t:\tGo Downward\n\nMouse Right Click\t:\tTo Change Textures"), TEXT("How do i ......"), MB_OK);
-		break;
-
-	case 12:
-		exit(EXIT_SUCCESS);
-		break;
-
 	}
 }
 
@@ -261,16 +167,6 @@ void Create_Menu()
 	glutCreateMenu(Menu_Process);
 	glutAddMenuEntry(" Default             ", 1);
 	glutAddMenuEntry(" Animation", 2);
-	glutAddMenuEntry(" Buildings", 3);
-	glutAddMenuEntry(" Horror", 4);
-	glutAddMenuEntry(" Greeny", 5);
-	glutAddMenuEntry(" Woods", 6);
-	glutAddMenuEntry(" Rocks", 7);
-	glutAddMenuEntry(" Circuits", 8);
-	glutAddMenuEntry(" Outer Wall ", 9);
-	glutAddMenuEntry(" Roof", 10);
-	glutAddMenuEntry(" How do i........!", 11);
-	glutAddMenuEntry(" Quit", 12);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
@@ -297,7 +193,7 @@ void Reshape_Function(int width, int height)
 
 void CallingAllCallBacks()
 {
-	glutIgnoreKeyRepeat(1);
+	glutIgnoreKeyRepeat(0);
 	glutDisplayFunc(Display_Scene);
 	glutKeyboardFunc(Keyboard_function);
 	glutSpecialFunc(Key_Pressed);

@@ -17,7 +17,6 @@ public:
 
 	void Draw_InnerRoom_5(GLuint,GLuint);
 
-
 	void Draw_Roof(GLuint, int,float);
 
 	void Draw_Floor(GLuint, float);

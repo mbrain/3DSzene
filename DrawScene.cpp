@@ -2,22 +2,16 @@
 #include"LoadImageFile.h"
 #include"DrawScene.h"
 
-
-//define each function from file DrawScene.h from class GameScene
-
-
-//draw floor
 void GameScene::Draw_Floor(GLuint texture,float f)
 {
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
-
-
 	glPushMatrix();
 
 	for (float a = -10.0; a <= 170.0; a = a + 10.0)
 	{
 		glBegin(GL_QUADS);
+		glColor3f(0.7, 0.7, 0.5);
 		glTexCoord2f(0.0, 0.0);
 		glVertex3f(0.0 + a, 0.0, 10.0);
 		glTexCoord2f(0.0, f);
@@ -34,6 +28,7 @@ void GameScene::Draw_Floor(GLuint texture,float f)
 		for (float a = -10.0; a <= 170.0; a = a + 10.0)
 		{
 			glBegin(GL_QUADS);
+			glColor3f(0.7, 0.7, 0.5);
 			glTexCoord2f(0.0, 0.0);
 			glVertex3f(0.0 + a, 0.0, -(b - 10.0));
 			glTexCoord2f(0.0, f);
@@ -48,28 +43,22 @@ void GameScene::Draw_Floor(GLuint texture,float f)
 	}
 
 	glPopMatrix();
-
 	glDisable(GL_TEXTURE_2D);
-
 	LoadTexture::FreeCreatedTexture(texture);
 }
 
-
-
-//draw roof
 void GameScene::Draw_Roof(GLuint texture,int x,float f)
 {
 	if (x == 1)
 	{
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, texture);
-
-
 		glPushMatrix();
 
 		for (float a = -10.0; a <= 170.0; a = a + 10.0)
 		{
 			glBegin(GL_QUADS);
+			glColor3f(0.7, 0.7, 0.5);
 			glTexCoord2f(0.0, 0.0);
 			glVertex3f(0.0 + a, 50.0, 20.0);
 			glTexCoord2f(0.0, f);
@@ -86,6 +75,7 @@ void GameScene::Draw_Roof(GLuint texture,int x,float f)
 			for (float a = -10.0; a <= 170.0; a = a + 10.0)
 			{
 				glBegin(GL_QUADS);
+				glColor3f(0.7, 0.7, 0.5); 
 				glTexCoord2f(0.0, 0.0);
 				glVertex3f(0.0 + a, 50.0, -(b - 10.0));
 				glTexCoord2f(0.0, f);
@@ -100,29 +90,23 @@ void GameScene::Draw_Roof(GLuint texture,int x,float f)
 		}
 
 		glPopMatrix();
-
 		glDisable(GL_TEXTURE_2D);
-
 		LoadTexture::FreeCreatedTexture(texture);
 	}
 }
 
-
-//draw outer wall
 void GameScene::Draw_OuterWall(GLuint texture,BOOL isdisplay)
 {
 	if (isdisplay)
 	{
 		glPushMatrix();
-
-
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, texture);
 
 		//wall 1
 		for (float a = 0.0; a <= 180.0; a = a + 10.0)
 		{
-			glColor3f(0.7, 0.7, 0.5);
+			glColor3f(100.7, 100.7, 0.5);
 			glBegin(GL_QUADS);
 			glTexCoord2f(0.0, 0.0);
 			glVertex3f(-10.0 + a, 0.0, 20.0);
@@ -138,7 +122,6 @@ void GameScene::Draw_OuterWall(GLuint texture,BOOL isdisplay)
 		//wall 2
 		for (float a = 0.0; a <= 320.0; a = a + 20.0)
 		{
-			glColor3f(0.7, 0.7, 0.5);
 			glBegin(GL_QUADS);
 			glTexCoord2f(0.0, 0.0);
 			glVertex3f(180.0, 0.0, 0.0 - a);
@@ -154,7 +137,6 @@ void GameScene::Draw_OuterWall(GLuint texture,BOOL isdisplay)
 		//wall 3
 		for (float a = 0.0; a <= 180.0; a = a + 10.0)
 		{
-			glColor3f(0.7, 0.7, 0.5);
 			glBegin(GL_QUADS);
 			glTexCoord2f(0.0, 0.0);
 			glVertex3f(180.0 - a, 0.0, -320.0);
@@ -167,11 +149,9 @@ void GameScene::Draw_OuterWall(GLuint texture,BOOL isdisplay)
 			glEnd();
 		}
 
-
 		//wall 4
 		for (float a = -10.0; a <= 320.0; a = a + 10.0)
 		{
-			glColor3f(0.7, 0.7, 0.5);
 			glBegin(GL_QUADS);
 			glTexCoord2f(0.0, 0.0);
 			glVertex3f(-10.0, 0.0, 0.0 - a);
@@ -184,27 +164,18 @@ void GameScene::Draw_OuterWall(GLuint texture,BOOL isdisplay)
 			glEnd();
 		}
 
-
 		glDisable(GL_TEXTURE_2D);
-
 		LoadTexture::FreeCreatedTexture(texture);
-
 		glPopMatrix();
 	}
 }
 
-
-//***********************************************************************
-//draw inner room 1
 void GameScene::Draw_InnerRoom_1(GLuint texture)
 {
 	glPushMatrix();
-
-
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	
 	//wall 1
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_QUADS);
@@ -218,7 +189,6 @@ void GameScene::Draw_InnerRoom_1(GLuint texture)
 	glVertex3f(12.0, 0.0, -5.0);
 	glEnd();
 	
-
 	//wall 2
 	glColor3f(0.6, 0.6, 0.6);
 	glBegin(GL_QUADS);
@@ -248,7 +218,6 @@ void GameScene::Draw_InnerRoom_1(GLuint texture)
 		glEnd();
 	}
 	
-
 	//wall 4
 	glColor3f(0.7, 0.7, 0.7);
 	glBegin(GL_QUADS);
@@ -287,7 +256,6 @@ void GameScene::Draw_InnerRoom_1(GLuint texture)
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(140.0, 0.0, -15.0);
 	glEnd();
-
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0);
@@ -299,7 +267,6 @@ void GameScene::Draw_InnerRoom_1(GLuint texture)
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(140.0, 0.0, -22.0);
 	glEnd();
-
 
 	//wall 7
 	glColor3f(0.8, 0.5, 0.4);
@@ -326,7 +293,6 @@ void GameScene::Draw_InnerRoom_1(GLuint texture)
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(120.0, 0.0, -35.0);
 	glEnd();
-
 	glColor3f(1.0, 0.7, 0.6);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0);
@@ -338,7 +304,6 @@ void GameScene::Draw_InnerRoom_1(GLuint texture)
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(120.0, 0.0, -55.0);
 	glEnd();
-
 
 	//wall 9
 	glColor3f(0.7, 0.4, 0.3);
@@ -352,7 +317,6 @@ void GameScene::Draw_InnerRoom_1(GLuint texture)
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(100.0, 0.0, -55.0);
 	glEnd();
-
 	glColor3f(0.7, 0.4, 0.3);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0);
@@ -403,7 +367,6 @@ void GameScene::Draw_InnerRoom_1(GLuint texture)
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(40.0, 0.0, -95.0);
 	glEnd();
-
 	glColor3f(1.0, 0.7, 0.6);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0);
@@ -416,27 +379,7 @@ void GameScene::Draw_InnerRoom_1(GLuint texture)
 	glVertex3f(10.0, 0.0, -95.0);
 	glEnd();
 
-
-
 	//wall 13
-	glColor3f(200.0, 200.0, 200.0);
-	glBegin(GL_QUADS);
-
-	glTexCoord2f(0.0, 0.0);
-	glVertex3f(10.0, 0.0, -5.0);
-
-	glTexCoord2f(0.0, 2.0);
-	glVertex3f(10.0, 50.0, -5.0); // schraeg nach innen, height, ..
-
-	glTexCoord2f(2.0, 2.0);
-	glVertex3f(10.0, 50.0, -25.0); // schraeg nach innen, height, ..
-
-	glTexCoord2f(2.0, 0.0);
-	glVertex3f(10.0, 0.0, -25.0);
-
-	glEnd();
-
-	/*
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0);
@@ -448,8 +391,6 @@ void GameScene::Draw_InnerRoom_1(GLuint texture)
 	glTexCoord2f(2.0, 0.0);
 	glVertex3f(10.0, 0.0, -25.0);
 	glEnd();
-	*/
-
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0);
@@ -461,7 +402,6 @@ void GameScene::Draw_InnerRoom_1(GLuint texture)
 	glTexCoord2f(2.0, 0.0);
 	glVertex3f(10.0, 0.0, -45.0);
 	glEnd();
-
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0);
@@ -474,27 +414,17 @@ void GameScene::Draw_InnerRoom_1(GLuint texture)
 	glVertex3f(10.0, 0.0, -95.0);
 	glEnd();
 
-
-
 	glDisable(GL_TEXTURE_2D);
-
 	LoadTexture::FreeCreatedTexture(texture);
-
 	glPopMatrix();
 
 }
 
-
-//***********************************************************************************
-//draw inner room 2
 void GameScene::Draw_InnerRoom_2(GLuint texture,GLuint texture2)
 {
 	glPushMatrix();
-
-
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
-
 
 	//wall 1
 	glColor3f(1.0, 0.7, 0.6);
@@ -521,7 +451,6 @@ void GameScene::Draw_InnerRoom_2(GLuint texture,GLuint texture2)
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(135.0, 0.0, -55.0);
 	glEnd();
-
 	glColor3f(0.8, 0.5, 0.4);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0);
@@ -546,7 +475,6 @@ void GameScene::Draw_InnerRoom_2(GLuint texture,GLuint texture2)
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(110.0, 0.0, -70.0);
 	glEnd();
-
 	glColor3f(1.0, 0.7, 0.6);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0);
@@ -572,7 +500,6 @@ void GameScene::Draw_InnerRoom_2(GLuint texture,GLuint texture2)
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(85.0, 0.0, -90.0);
 	glEnd();
-
 	glColor3f(0.8, 0.5, 0.4);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0);
@@ -623,7 +550,6 @@ void GameScene::Draw_InnerRoom_2(GLuint texture,GLuint texture2)
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(70.0, 0.0, -140.0);
 	glEnd();
-	
 
 	//wall 8
 	glColor3f(1.0, 1.0, 1.0);
@@ -638,8 +564,6 @@ void GameScene::Draw_InnerRoom_2(GLuint texture,GLuint texture2)
 	glVertex3f(70.0, 0.0, -160.0);
 	glEnd();
 	
-	
-
 	//wall 10
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_QUADS);
@@ -651,8 +575,7 @@ void GameScene::Draw_InnerRoom_2(GLuint texture,GLuint texture2)
 	glVertex3f(140.0, 50.0, -200.0);
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(140.0, 0.0, -200.0);
-	glEnd();
-	
+	glEnd();	
 
 	//wall 11
 	glColor3f(1.0, 1.0, 1.0);
@@ -726,10 +649,7 @@ void GameScene::Draw_InnerRoom_2(GLuint texture,GLuint texture2)
 	}
 
 	glDisable(GL_TEXTURE_2D);
-
 	LoadTexture::FreeCreatedTexture(texture);
-
-
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture2);
 
@@ -747,21 +667,14 @@ void GameScene::Draw_InnerRoom_2(GLuint texture,GLuint texture2)
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
-
 	LoadTexture::FreeCreatedTexture(texture2);
-
 	glPopMatrix();
 
 }
 
-
-
-//***********************************************************************************
-//draw inner room 3
 void GameScene::Draw_InnerRoom_3(GLuint texture, GLuint texture2)
 {
 	glPushMatrix();
-
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -815,7 +728,6 @@ void GameScene::Draw_InnerRoom_3(GLuint texture, GLuint texture2)
 	glTexCoord2f(2.0, 0.0);
 	glVertex3f(55.0, 0.0, -160.0);
 	glEnd();
-	
 
 	//wall 4
 	glColor3f(0.8, 0.8, 0.8);
@@ -847,9 +759,7 @@ void GameScene::Draw_InnerRoom_3(GLuint texture, GLuint texture2)
 	}
 
 	glDisable(GL_TEXTURE_2D);
-
 	LoadTexture::FreeCreatedTexture(texture);
-
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture2);
 
@@ -867,20 +777,13 @@ void GameScene::Draw_InnerRoom_3(GLuint texture, GLuint texture2)
 	glEnd();
 
 	glDisable(GL_TEXTURE_2D);
-
 	LoadTexture::FreeCreatedTexture(texture2);
-
 	glPopMatrix();
 }
 
-
-//***********************************************************************************
-//draw inner room 4
 void GameScene::Draw_InnerRoom_4(GLuint texture, GLuint texture2)
 {
 	glPushMatrix();
-
-
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
@@ -897,7 +800,6 @@ void GameScene::Draw_InnerRoom_4(GLuint texture, GLuint texture2)
 	glVertex3f(110.0, 0.0, -220.0);
 	glEnd();
 	
-
 	//wall 3
 	glColor3f(1.0, 1.0, 1.0);
 	glBegin(GL_QUADS);
@@ -911,7 +813,6 @@ void GameScene::Draw_InnerRoom_4(GLuint texture, GLuint texture2)
 	glVertex3f(70.0, 0.0, -290.0);
 	glEnd();
 	
-
 	//wall 4
 	glColor3f(0.7, 0.7, 0.7);
 	glBegin(GL_QUADS);
@@ -977,10 +878,6 @@ void GameScene::Draw_InnerRoom_4(GLuint texture, GLuint texture2)
 	glPopMatrix();
 }
 
-
-
-//***********************************************************************************
-//draw inner room 5
 void GameScene::Draw_InnerRoom_5(GLuint texture, GLuint texture2)
 {
 	glPushMatrix();
@@ -1053,12 +950,8 @@ void GameScene::Draw_InnerRoom_5(GLuint texture, GLuint texture2)
 	glVertex3f(10.0, 0.0, -220.0);
 	glEnd();
 
-
 	glDisable(GL_TEXTURE_2D);
-
 	LoadTexture::FreeCreatedTexture(texture);
-
-
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture2);
 
@@ -1093,190 +986,55 @@ void GameScene::Draw_Pipes(GLuint texture)
 	quad = gluNewQuadric();
 	gluQuadricTexture(quad, 1);
 
+	glColor3f(0.7, 10.7, 0.5);
+
 	//all scene pipe 1
 	glPushMatrix();
-
 	glTranslatef(0.0, 25.0, 13.0);
 	glRotatef((GLfloat)90, 1.0, 0.0, 0.0);
 	gluCylinder(quad, 1.0, 1.0, 25.0, 40, 40);
-
-	glPopMatrix();
-	
+	glPopMatrix();	
 	glPushMatrix();
-
 	glTranslatef(0.0, 50.0, 13.0);
 	glRotatef((GLfloat)90, 1.0, 0.0, 0.0);
 	gluCylinder(quad, 1.0, 1.0, 25.0, 40, 40);
-
 	glPopMatrix();
-
 
 	//all scene pipe 2
 	glPushMatrix();
-
-	glTranslatef(170.0, 25.0, 13.0);
+	glTranslatef(175.0, 25.0, 15.0);
 	glRotatef((GLfloat)90, 1.0, 0.0, 0.0);
 	gluCylinder(quad, 1.0, 1.0, 25.0, 40, 40);
-
-	glPopMatrix();
-	
+	glPopMatrix();	
 	glPushMatrix();
-
-	glTranslatef(170.0, 50.0, 13.0);
+	glTranslatef(175.0, 50.0, 15.0);
 	glRotatef((GLfloat)90, 1.0, 0.0, 0.0);
 	gluCylinder(quad, 1.0, 1.0, 25.0, 40, 40);
-
 	glPopMatrix();
-
-	//all scene pipe 3
-	glPushMatrix();
-
-	glTranslatef(170.0, 25.0, -150.0);
-	glRotatef((GLfloat)90, 1.0, 0.0, 0.0);
-	gluCylinder(quad, 1.0, 1.0, 25.0, 40, 40);
-
-	glPopMatrix();
-
-	glPushMatrix();
-
-	glTranslatef(170.0, 50.0, -150.0);
-	glRotatef((GLfloat)90, 1.0, 0.0, 0.0);
-	gluCylinder(quad, 1.0, 1.0, 25.0, 40, 40);
-
-	glPopMatrix();
-	
 
 	//all scene pipe 4
 	glPushMatrix();
-
-	glTranslatef(170.0, 25.0, -300.0);
+	glTranslatef(175.0, 25.0, -315.0);
 	glRotatef((GLfloat)90, 1.0, 0.0, 0.0);
 	gluCylinder(quad, 1.0, 1.0, 25.0, 40, 40);
-
 	glPopMatrix();
-
 	glPushMatrix();
-
-	glTranslatef(170.0, 50.0, -300.0);
+	glTranslatef(175.0, 50.0, -315.0);
 	glRotatef((GLfloat)90, 1.0, 0.0, 0.0);
 	gluCylinder(quad, 1.0, 1.0, 25.0, 40, 40);
-
 	glPopMatrix();
 
-	
+
 	//all scene pipe 5
 	glPushMatrix();
-
-	glTranslatef(0.0, 25.0, -300.0);
+	glTranslatef(-5.0, 25.0, -315.0);
 	glRotatef((GLfloat)90, 1.0, 0.0, 0.0);
 	gluCylinder(quad, 1.0, 1.0, 25.0, 40, 40);
-
 	glPopMatrix();
-
 	glPushMatrix();
-
-	glTranslatef(0.0, 50.0, -300.0);
+	glTranslatef(-5.0, 50.0, -315.0);
 	glRotatef((GLfloat)90, 1.0, 0.0, 0.0);
 	gluCylinder(quad, 1.0, 1.0, 25.0, 40, 40);
-
-	glPopMatrix();
-
-
-	// wall 3 pipe 1
-	glPushMatrix();
-
-	glTranslatef(12.0, 10.0, -8.0);
-	glRotatef((GLfloat)90, 0.0, 1.0, 0.0);
-	gluCylinder(quad, 2.0, 2.0, 30.0, 40, 40);
-
-	glPopMatrix();
-
-	glPushMatrix();
-
-	glTranslatef(42.0, 10.0, -8.0);
-	glRotatef((GLfloat)90, 0.0, 1.0, 0.0);
-	gluCylinder(quad, 2.0, 2.0, 30.0, 40, 40);
-
-	glPopMatrix();
-
-	glPushMatrix();
-
-	glTranslatef(72.0, 10.0, -8.0);
-	glRotatef((GLfloat)90, 0.0, 1.0, 0.0);
-	gluCylinder(quad, 2.0, 2.0, 30.0, 40, 40);
-
-	glPopMatrix();
-
-	glPushMatrix();
-
-	glTranslatef(102.0, 10.0, -8.0);
-	glRotatef((GLfloat)90, 0.0, 1.0, 0.0);
-	gluCylinder(quad, 2.0, 2.0, 18.0, 40, 40);
-
-	glPopMatrix();
-	
-	// wall 3 pipe 2
-	glPushMatrix();
-	glTranslatef(12.0, 20.0, -8.0);
-	glRotatef((GLfloat)90, 0.0, 1.0, 0.0);
-	gluCylinder(quad, 2.0, 2.0, 30.0, 40, 40);
-
-	glPopMatrix();
-
-	glPushMatrix();
-
-	glTranslatef(42.0, 20.0, -8.0);
-	glRotatef((GLfloat)90, 0.0, 1.0, 0.0);
-	gluCylinder(quad, 2.0, 2.0, 30.0, 40, 40);
-
-	glPopMatrix();
-
-	glPushMatrix();
-
-	glTranslatef(72.0, 20.0, -8.0);
-	glRotatef((GLfloat)90, 0.0, 1.0, 0.0);
-	gluCylinder(quad, 2.0, 2.0, 30.0, 40, 40);
-
-	glPopMatrix();
-
-	glPushMatrix();
-
-	glTranslatef(102.0, 20.0, -8.0);
-	glRotatef((GLfloat)90, 0.0, 1.0, 0.0);
-	gluCylinder(quad, 2.0, 2.0, 18.0, 40, 40);
-
-	glPopMatrix();
-
-	// wall 3 pipe 3
-	glPushMatrix();
-	glTranslatef(12.0, 30.0, -8.0);
-	glRotatef((GLfloat)90, 0.0, 1.0, 0.0);
-	gluCylinder(quad, 2.0, 2.0, 30.0, 40, 40);
-
-	glPopMatrix();
-
-	glPushMatrix();
-
-	glTranslatef(42.0, 30.0, -8.0);
-	glRotatef((GLfloat)90, 0.0, 1.0, 0.0);
-	gluCylinder(quad, 2.0, 2.0, 30.0, 40, 40);
-
-	glPopMatrix();
-
-	glPushMatrix();
-
-	glTranslatef(72.0, 30.0, -8.0);
-	glRotatef((GLfloat)90, 0.0, 1.0, 0.0);
-	gluCylinder(quad, 2.0, 2.0, 30.0, 40, 40);
-
-	glPopMatrix();
-
-	glPushMatrix();
-
-	glTranslatef(102.0, 30.0, -8.0);
-	glRotatef((GLfloat)90, 0.0, 1.0, 0.0);
-	gluCylinder(quad, 2.0, 2.0, 18.0, 40, 40);
-
 	glPopMatrix();
 
 	LoadTexture::FreeCreatedTexture(texture);
@@ -1287,8 +1045,6 @@ void GameScene::Draw_Pipes(GLuint texture)
 void GameScene::Draw_WoodBoxes(GLuint texture)
 {
 	glPushMatrix();
-
-
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	
@@ -1344,61 +1100,57 @@ void GameScene::Draw_WoodBoxes(GLuint texture)
 		glEnd();
 	}
 	
+	//wood box 1
+	glColor3f(0.7, 0.6, 0.4);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(170.8, 10.0, -100.0);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(180.0, 10.0, -100.0);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(180.0, 0.1, -100.0);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(170.8, 0.1, -100.0);
+	glEnd();
 
-		//wood box 1
-		glColor3f(0.7, 0.6, 0.4);
-		glBegin(GL_POLYGON);
-		glTexCoord2f(0.0, 0.0);
-		glVertex3f(170.8, 10.0, -100.0);
-		glTexCoord2f(0.0, 1.0);
-		glVertex3f(180.0, 10.0, -100.0);
-		glTexCoord2f(1.0, 1.0);
-		glVertex3f(180.0, 0.1, -100.0);
-		glTexCoord2f(1.0, 0.0);
-		glVertex3f(170.8, 0.1, -100.0);
-		glEnd();
+	glColor3f(0.7, 0.6, 0.4);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(170.8, 10.0, -100.0);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(170.8, 10.0, -112.0);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(170.8, 0.1, -112.0);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(170.8, 0.1, -100.0);
+	glEnd();
 
-		glColor3f(0.7, 0.6, 0.4);
-		glBegin(GL_POLYGON);
-		glTexCoord2f(0.0, 0.0);
-		glVertex3f(170.8, 10.0, -100.0);
-		glTexCoord2f(0.0, 1.0);
-		glVertex3f(170.8, 10.0, -112.0);
-		glTexCoord2f(1.0, 1.0);
-		glVertex3f(170.8, 0.1, -112.0);
-		glTexCoord2f(1.0, 0.0);
-		glVertex3f(170.8, 0.1, -100.0);
-		glEnd();
+	glColor3f(0.7, 0.6, 0.4);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(170.8, 10.0, -112.0);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(180.0, 10.0, -112.0);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(180.0, 0.1, -112.0);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(170.8, 0.1, -112.0);
+	glEnd();
 
-		glColor3f(0.7, 0.6, 0.4);
-		glBegin(GL_POLYGON);
-		glTexCoord2f(0.0, 0.0);
-		glVertex3f(170.8, 10.0, -112.0);
-		glTexCoord2f(0.0, 1.0);
-		glVertex3f(180.0, 10.0, -112.0);
-		glTexCoord2f(1.0, 1.0);
-		glVertex3f(180.0, 0.1, -112.0);
-		glTexCoord2f(1.0, 0.0);
-		glVertex3f(170.8, 0.1, -112.0);
-		glEnd();
-
-		glColor3f(0.7, 0.6, 0.4);
-		glBegin(GL_POLYGON);
-		glTexCoord2f(0.0, 0.0);
-		glVertex3f(170.8, 10.0, -112.0);
-		glTexCoord2f(0.0, 1.0);
-		glVertex3f(180.0, 10.0, -112.0);
-		glTexCoord2f(1.0, 1.0);
-		glVertex3f(180.0, 10.0, -100.0);
-		glTexCoord2f(1.0, 0.0);
-		glVertex3f(170.8, 10.0, -100.0);
-		glEnd();
-
-
+	glColor3f(0.7, 0.6, 0.4);
+	glBegin(GL_POLYGON);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(170.8, 10.0, -112.0);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(180.0, 10.0, -112.0);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(180.0, 10.0, -100.0);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(170.8, 10.0, -100.0);
+	glEnd();
+	
 	glDisable(GL_TEXTURE_2D);
-
 	LoadTexture::FreeCreatedTexture(texture);
-
 	glPopMatrix();
 }
 
@@ -1406,11 +1158,8 @@ void GameScene::Draw_WoodBoxes(GLuint texture)
 void GameScene::Display_Text(GLuint texture)
 {
 	glPushMatrix();
-
-
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, texture);
-
 
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0, 0.0);
@@ -1434,10 +1183,7 @@ void GameScene::Display_Text(GLuint texture)
 	glVertex3f(-9.9, 10.0, -64.0);
 	glEnd();
 
-
 	glDisable(GL_TEXTURE_2D);
-
 	LoadTexture::FreeCreatedTexture(texture);
-
 	glPopMatrix();
 }
