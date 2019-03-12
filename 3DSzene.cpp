@@ -161,7 +161,6 @@ void Menu_Process(int mode)
 
 void Create_Menu()
 {
-
 	glutCreateMenu(Menu_Process);
 	glutAddMenuEntry("Default", 1);
 	glutAddMenuEntry("Interieur", 2);
@@ -170,8 +169,7 @@ void Create_Menu()
 
 void Reshape_Function(int width, int height)
 {
-	if (height == 0)
-		height = 1;
+	if (height == 0) height = 1;
 
 	_width = width;
 	_height = height;
@@ -203,13 +201,9 @@ void CallingAllCallBacks()
 void SetTextColorAndBackgroundColor(int TextColor, int BackgroundColor)
 {
 	WORD color = ((BackgroundColor & 0x00F) << 4) + (TextColor & 0x00F);
-
 	HANDLE hstdout = GetStdHandle(STD_OUTPUT_HANDLE);
-
 	COORD coord = { 0, 0 };
-
 	DWORD count;
-
 	CONSOLE_SCREEN_BUFFER_INFO csbi;
 
 	SetConsoleTextAttribute(hstdout, color);
@@ -222,70 +216,21 @@ void SetTextColorAndBackgroundColor(int TextColor, int BackgroundColor)
 	}
 }
 
-
-//main function
 int main(int argc, char **argv)
 {
 	int option;
-
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA);
-
-	int result = MessageBox(NULL, TEXT("Would you like to run in Full Screen Mode ?\n\nClick \" YES \" to go to Full Screen Mode\n\nClick \" NO \" to go to Window Screen Mode"), TEXT("Full Screen or Window"), MB_YESNOCANCEL);
+	int result = MessageBox(NULL, TEXT("Run in Full Screen?"), TEXT("Full Screen or Window"), MB_YESNOCANCEL);
 	
-	if (result == IDYES)
-	{
-		SetTextColorAndBackgroundColor(15, 2);
-		printf("\t===  Select any one of the following texture  ===");
-		printf("\n\n\t\t1]     Default  ");
-		printf("\n\t\t2]     Animation  ");
-		printf("\n\t\t3]     Buildings  ");
-		printf("\n\t\t4]     Horror  ");
-		printf("\n\t\t5]     Greeny  ");
-		printf("\n\t\t6]     Woods  ");
-		printf("\n\t\t7]     Rocks  ");
-		printf("\n\t\t8]     Circuit  ");
-		printf("\n\t\t9]     How do i ........  ");
-		printf("\n\t\t10]     Quit  ");
-		printf("\n\n\tEnter your Choice = ");
-		scanf_s("%d", &option);
+	glutInitWindowPosition(10, 10);
+	glutInitWindowSize(1000, 600);
+	glutCreateWindow("3D Home Scene");
+	CallingAllCallBacks();
+	if (result == IDYES) glutFullScreen();
+	Create_Menu();
+	glutMainLoop();
 
-			if (option >= 1 && option <= 9)
-			{
-				if (option == 10)
-				{
-					exit(EXIT_SUCCESS);
-				}
-				else if (option == 9)
-				{
-					MessageBox(NULL, TEXT("UP\t\t:\tGo Forward\nDOWN\t\t:\tGo Backward\nLEFT\t\t:\tMove Left\nRIGHT\t\t:\tMove Right\nPAGE UP\t\t:\tGo Upward\nPAGE DOWN\t:\tGo Downward"), TEXT("How do i ......"), MB_OK);
-				}
-				else
-				{
-					texture_type = option;
-					glutInitWindowPosition(10, 10);
-					glutInitWindowSize(1000, 600);
-					glutCreateWindow("3D Home Scene");
-					CallingAllCallBacks();
-					glutFullScreen();
-					glutMainLoop();
-				}
-			}
-			else
-			{
-				MessageBox(NULL, TEXT("Invalid Option"), TEXT("Error....."), MB_ICONERROR);
-			}
-	}
-
-    if (result == IDNO)
-	{
-		glutInitWindowPosition(80, 40);
-		glutInitWindowSize(800, 500);
-		glutCreateWindow("3D Game Scene");
-		CallingAllCallBacks();
-		Create_Menu();
-		glutMainLoop();
-	}
 	return(0);
 }
 
